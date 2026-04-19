@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Google Sans", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+}
+
+:root {
+  /* Easing Library */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decel: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accel: cubic-bezier(0.4, 0, 1, 1);
+  --ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);
+
+  /* Shadows */
+  --shadow-1: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-2: 0 4px 6px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+  --shadow-3: 0 10px 20px rgba(0,0,0,0.5), 0 6px 6px rgba(0,0,0,0.4);
+  --shadow-4: 0 20px 40px rgba(0,0,0,0.6), 0 10px 10px rgba(0,0,0,0.5);
+  --shadow-5: 0 32px 64px rgba(0,0,0,0.7);
+  
+  /* Primary Brand (Sakura Pink) */
+  --color-primary: #ff8da1;
+}
+
+* {
+  letter-spacing: -0.01em;
+  box-sizing: border-box;
+}
+
+body {
+  /* Layer 1 - Deep Sakura Ambient Glow */
+  background: radial-gradient(circle at 50% 0%, #3a0d1e 0%, #120309 60%, #080104 100%);
+  background-attachment: fixed;
+  color: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Layer Utilities */
+@layer utilities {
+  .layer-1 {
+    background: transparent;
+  }
+  .layer-2 {
+    background-color: rgba(255, 141, 161, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .layer-3 {
+    background-color: rgba(255, 141, 161, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  
+  .sakura-glow {
+    box-shadow: 0 0 40px -10px rgba(255, 141, 161, 0.3);
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* Borders */
+  .chrome-border {
+    border: 1px solid rgba(255, 141, 161, 0.12);
+  }
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255,255,255,0.05);
+}
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Lenis Required Styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Custom Views / Typography */
+.text-display { font-size: clamp(32px, 8vw, 80px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; }
+.text-headline-l { font-size: clamp(24px, 5vw, 32px); font-weight: 600; }
+.text-title-m { font-size: 18px; font-weight: 600; }
+.text-body-m { font-size: 16px; font-weight: 400; }
+.text-label-s { font-size: 13px; font-weight: 500; }
