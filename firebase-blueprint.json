@@ -1,0 +1,59 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile data",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "createdAt": { "type": "integer" },
+        "updatedAt": { "type": "integer" }
+      },
+      "required": ["uid", "email", "createdAt", "updatedAt"]
+    },
+    "Favorite": {
+      "title": "Favorite",
+      "description": "A starred/favorited anime by a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "animeId": { "type": "string" },
+        "title": { "type": "string" },
+        "posterUrl": { "type": "string" },
+        "addedAt": { "type": "integer" }
+      },
+      "required": ["userId", "animeId", "title", "addedAt"]
+    },
+    "WatchHistory": {
+      "title": "WatchHistory",
+      "description": "Watch progress for a specific episode",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "animeId": { "type": "string" },
+        "episodeId": { "type": "string" },
+        "progressSeconds": { "type": "number" },
+        "durationSeconds": { "type": "number" },
+        "lastWatchedAt": { "type": "integer" }
+      },
+      "required": ["userId", "animeId", "episodeId", "progressSeconds", "lastWatchedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents."
+    },
+    "/users/{userId}/favorites/{favoriteId}": {
+      "schema": "Favorite",
+      "description": "User's favorited shows."
+    },
+    "/users/{userId}/history/{historyId}": {
+      "schema": "WatchHistory",
+      "description": "User's watch history per anime/episode."
+    }
+  }
+}
